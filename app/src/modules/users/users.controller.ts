@@ -1,13 +1,14 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
+import { User } from '../../entities/user.entity';
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Get('me')
-    getMe(@Req() req: Request): string {
-        return this.usersService.getMe();
+    async getMe(@Req() req: Request): Promise<User> {
+        return this.usersService.getMe(req.query.token);
     }
 }
