@@ -4,16 +4,16 @@ import { DatabaseModule } from '../../../database/database.module';
 
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { UsersProviders } from './users.providers';
+import { usersProviders } from './users.providers';
 
 @Module({
     imports: [DatabaseModule],
     controllers: [UsersController],
     providers: [
         UsersService,
-        ...UsersProviders
+        ...usersProviders
     ],
-    exports: UsersProviders
+    exports: usersProviders
 })
 
 export class UsersModule {}

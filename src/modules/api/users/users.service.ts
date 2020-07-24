@@ -13,4 +13,18 @@ export class UsersService {
     async getMe(token: string): Promise<User> {
         return this.userModel.findOne({token: token});
     }
+
+    /**
+     * @param params - parameters object
+     * @param params.query - query string
+     */
+    async get(params: Object): Promise<User[]> {
+        const condition = {};
+
+        if (params.query) {
+            condition.email = {$regex: new RegExp(params.query, 'i')};
+        }
+
+        return this.userModel.find(condition, {email: 1, _id: 1});
+    }
 }

@@ -20,7 +20,7 @@ module.exports = {
     devtool,
     externals: [
         nodeExternals({
-            whitelist: ['webpack/hot/poll?100']
+            allowlist: ['webpack/hot/poll?100']
         }),
     ],
     module: {

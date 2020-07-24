@@ -11,4 +11,9 @@ export class UsersController {
     async getMe(@Req() req: Request): Promise<User> {
         return this.usersService.getMe(req.query.token);
     }
+
+    @Get()
+    async get(@Req() req: Request): Promise<User[]> {
+        return this.usersService.get(req.query);
+    }
 }

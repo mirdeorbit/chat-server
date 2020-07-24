@@ -13,7 +13,8 @@ import { UsersModule } from '../users/users.module';
     providers: [
         ChatsService,
         ...chatProviders
-    ]
+    ],
+    exports: chatProviders
 })
 
 export class ChatsModule {}

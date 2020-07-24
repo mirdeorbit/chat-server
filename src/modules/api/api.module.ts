@@ -6,8 +6,10 @@ import { DatabaseModule } from '../../database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ChatsModule } from './chats/chats.module';
+import { MessagesModule } from './messages/messages.module';
 
 import { AppConfigModule } from '../../config/app/app.config.module';
+import { WebsocketGateway } from './websocket.gateway';
 
 @Module({
     imports: [
@@ -15,8 +17,10 @@ import { AppConfigModule } from '../../config/app/app.config.module';
         DatabaseModule,
         UsersModule,
         AuthModule,
-        ChatsModule
-    ]
+        ChatsModule,
+        MessagesModule
+    ],
+    providers: [WebsocketGateway]
 })
 
 export class ApiModule implements NestModule {

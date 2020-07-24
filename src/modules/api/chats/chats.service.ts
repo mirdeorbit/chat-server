@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../../../interfaces/user.interface';
@@ -20,6 +21,29 @@ export class ChatsService {
             return this.chatModel.find({participantIds: currentUser._id});
         } else {
             return [];
+        }
+    }
+
+    async create(params: Object): Promise<Chat> {
+        const user = await this.userModel.findOne({token: params.token});
+
+        if (!user) {
+            throw new Error('Current user not found');
+        }
+
+        const participants = _([user._id.toString(), ...params.chat.participants]).uniq();
+
+        const existingChat = await this.chatModel.findOne({
+            participants: {
+                $all: participants
+            }
+        });
+
+        if (existingChat) {
+            return existingChat;
+        } else {
+            const chat = new this.chatModel({ participants, ...params.chat });
+            return chat.save();
         }
     }
 }

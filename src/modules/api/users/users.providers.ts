@@ -3,7 +3,7 @@ import { UsersSchema } from '../../../database/schemas/users.schema';
 
 import { USER_MODEL, DATABASE_CONNECTION } from '../../../constants';
 
-export const UsersProviders = [
+export const usersProviders = [
     {
         provide: USER_MODEL,
         useFactory: (connection: Connection) => connection.model('User', UsersSchema),
